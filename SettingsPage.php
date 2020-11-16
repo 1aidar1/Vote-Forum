@@ -207,14 +207,14 @@
         };
         // jQuery post
         $.post(url, query, function (data, status) {
-            var d = JSON.parse(data);
-            alert(d);
+            //var d = JSON.parse(data);
+            alert(data);
 
         });
     });
 
     $('#btn-submit-handle').click(() => {
-        var handle = $('#new-handle').val();
+        var new_handle = $('#new-handle').val();
         $('#new-handle').val('');
 
         var url = 'controller.php';
@@ -225,26 +225,28 @@
         };
         // jQuery post
         $.post(url, query, function (data, status) {
-            var d = JSON.parse(data);
-            alert(d);
+            //var d = JSON.parse(data);
+            alert(data);
 
         });
     });
 
     $('#btn-submit-password').click(() => {
         var new_password = $('#new-password').val();
+        var confirm_password = $('#confirm-password').val();
         $('#new-password').val('');
-
+        $('#confirm-password').val('');
         var url = 'controller.php';
         var query = {
             page: 'SettingsPage',
             command: 'ChangePassword',
-            new_password: new_password
+            new_password: new_password,
+            confirm_password: confirm_password
         };
         // jQuery post
         $.post(url, query, function (data, status) {
-            var d = JSON.parse(data);
-            alert(d);
+            //var d = JSON.parse(data);
+            alert(data);
 
         });
     });
@@ -261,8 +263,8 @@
         };
         // jQuery post
         $.post(url, query, function (data, status) {
-            var d = JSON.parse(data);
-            alert(d);
+            //var d = JSON.parse(data);
+            alert(data);
         });
     });
 </script>

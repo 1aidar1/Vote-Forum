@@ -75,12 +75,13 @@ if (empty($_POST['page'])) {
         if (isset($_POST['command'])) {
             $command = $_POST['command'];
         }
+        $id = $_SESSION['id'];
         switch ($command) {
             case 'ChangeUIN':
                 if (isset($_POST['new_UIN'])) {
                     $UIN = $_POST['new_UIN'];
                 }
-                echo change_UIN($UIN, $id);
+                echo change_UIN($UIN,$id);
                 break;
             case 'ChangeHandle':
                 if (isset($_POST['new_handle'])) {
@@ -91,8 +92,9 @@ if (empty($_POST['page'])) {
             case 'ChangePassword':
                 if (isset($_POST['new_password'])) {
                     $password = $_POST['new_password'];
+                    $confirm_password = $_POST['confirm_password'];
                 }
-                echo change_password($password, $id);
+                echo change_password($password, $confirm_password, $id);
                 break;
             case 'ChangeTel':
                 if (isset($_POST['new_tel'])) {

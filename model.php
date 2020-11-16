@@ -22,6 +22,16 @@ function check_existence_UIN($UIN)
     else
         return false;
 }
+function check_existence_tel($tel)
+{
+    global $conn;
+    $sql = "select Tel from ProjectUsers where Tel = '$tel'";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0)
+        return true;
+    else
+        return false;
+}
 
 function get_user_id($handle)
 {
