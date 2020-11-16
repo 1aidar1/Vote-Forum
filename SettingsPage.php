@@ -201,13 +201,14 @@
 
         var url = 'controller.php';
         var query = {
-            page: 'UserPage',
+            page: 'SettingsPage',
             command: 'ChangeUIN',
             new_UIN: new_UIN
         };
         // jQuery post
         $.post(url, query, function (data, status) {
             var d = JSON.parse(data);
+            alert(d);
 
         });
     });
@@ -218,13 +219,14 @@
 
         var url = 'controller.php';
         var query = {
-            page: 'UserPage',
+            page: 'SettingsPage',
             command: 'ChangeHandle',
             new_handle: new_handle
         };
         // jQuery post
         $.post(url, query, function (data, status) {
             var d = JSON.parse(data);
+            alert(d);
 
         });
     });
@@ -235,13 +237,14 @@
 
         var url = 'controller.php';
         var query = {
-            page: 'UserPage',
+            page: 'SettingsPage',
             command: 'ChangePassword',
             new_password: new_password
         };
         // jQuery post
         $.post(url, query, function (data, status) {
             var d = JSON.parse(data);
+            alert(d);
 
         });
     });
@@ -252,14 +255,14 @@
 
         var url = 'controller.php';
         var query = {
-            page: 'UserPage',
+            page: 'SettingsPage',
             command: 'ChangeTel',
             new_tel: new_tel
         };
         // jQuery post
         $.post(url, query, function (data, status) {
             var d = JSON.parse(data);
-
+            alert(d);
         });
     });
 </script>

@@ -24,7 +24,6 @@
 
 <div class="row header">
     <div class="col-md-8">
-
     </div>
 
     <div class="col-md-2">
@@ -32,8 +31,7 @@
             Register
         </button>
         <!-- Modal Register-->
-        <div class="modal fade" id="register-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="register-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -77,41 +75,45 @@
             Sign In
         </button>
         <!-- Modal SignIn-->
-        <div class="modal fade" id="sign-in-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <label for="signin-username">Username: </label>
-                            <input type="text" name="username" id="signin-handle" required>
+        <form action="controller.php" method="POST" id="form-signin" name="form-signin">
+            <div class="modal fade" id="sign-in-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                        <br>
-                        <div>
-                            <label for="signin-password">Password: </label>
-                            <input type="password" name="password" id="signin-password" required>
+                        <div class="modal-body">
+                            <div>
+                                <label for="signin-username">Username: </label>
+                                <input type="text" name="handle" id="signin-handle" required>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="signin-password">Password: </label>
+                                <input type="password" name="password" id="signin-password" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" id="btn-form-signin" class="btn btn-primary">Sign In</button>
+                        <div class="modal-footer">
+                            <input type="text" name="page" id="page" value="Header" style="visibility: hidden; position: absolute;">
+                            <input type="text" name="command" id="signin" value="SignIn" style="visibility: hidden; position: absolute;">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" form="form-signin" id="btn-form-signin" class="btn btn-primary">Sign In</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 
 </div>
 
 <script>
-
-
+    /*
     $('#btn-form-signin').click(() => {
+        $('#sign-in-modal').modal('hide');
         var url = 'controller.php';
         var query = {
             page: 'MainPage',
@@ -120,17 +122,16 @@
             password: $('#signin-password').val()
         };
         // jQuery post
-        $.post(url, query, function (data, status) {
-            var d = JSON.parse(data);
-            alert(d);
-
+        $.post(url, query, function(data) {
         });
     });
+    */
 
     $('#btn-form-register').click(() => {
+        $('#register-modal').modal('hide');
         var url = 'controller.php';
         var query = {
-            page: 'MainPage',
+            page: 'Header',
             command: 'Register',
             UIN: $('#register-UIN').val(),
             handle: $('#register-handle').val(),
@@ -138,10 +139,9 @@
             tel: $('#register-tel').val()
         };
         // jQuery post
-        $.post(url, query, function (data, status) {
-            var d = JSON.parse(data);
-            alert(d);
+        $.post(url, query, function(data) {
+            var d = jQuery.parseJSON(data);
+            alert(d.display);
         });
     });
-
 </script>
