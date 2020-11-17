@@ -1,267 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-</head>
+<style>
+    .content {
+        height: 150px;
+    }
 
-<body>
-    <style>
-        div {
-            outline: red 1px solid;
-        }
+    div {
+        outline: 1px red solid;
+    }
 
-        label+p {
-            color: darkgrey;
-            font-size: 1em;
-        }
+    .nav-item {
+        text-align: center;
+    }
 
-        label {
-            margin: 0px;
-            font-size: 1.3em;
-        }
+    .nav-item>button {
+        width: 6em;
+    }
+</style>
 
-        .container>.row {
-            display: flex;
-            align-items: center;
-        }
+<div class="row content">
+    <div class="col-md-9" id="content-pane">
 
-        #btn-logout:hover {
-            cursor: pointer;
-        }
-    </style>
-    <div class="container">
-        <?php
-        include 'SignedHeader.php';
-        ?>
-        <div class="row">
-            <h1>Account Settings</h1>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-md-4">
-                <label for="">UIN</label>
-                <p id="account-UIN">12345678</p>
-            </div>
-            <div class="col-md-2">
-                <button id='btn-change-UIN' class="btn btn-info">Change</button>
-            </div>
-        </div>
-        <!-- Modal Change UIN-->
-        <div id="change-UIN-modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title"><b>Change UIN</b></h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="text" class="form-control" placeholder="New UIN" id='new-UIN' required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="button" id="btn-submit-UIN" data-dismiss="modal"
-                            class="btn btn-light">Submit</button>
-                    </div>
-                </div>
 
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-4">
-                <label for="">Handle</label>
-                <p id="account-handle">Username</p>
-            </div>
-            <div class="col-md-2">
-                <button id='btn-change-handle' class="btn btn-info">Change</button>
-            </div>
-        </div>
-        <!-- Modal Change Handle-->
-        <div id="change-handle-modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title"><b>Change Handle</b></h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="text" class="form-control" placeholder="New Handle" id='new-handle' required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="button" id="btn-submit-handle" data-dismiss="modal"
-                            class="btn btn-light">Submit</button>
-                    </div>
-                </div>
+    </div>
+    <div class="col-md-3">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <button type="button" id="btn-create-post" class="btn btn-outline-primary">Create Post</button>
+            </li>
+            <br>
+            <li class="nav-item">
+                <button type="button" id="btn-send-vote" class="btn btn-outline-primary">Send Vote</button>
+            </li>
+            <br>
+            <li class="nav-item">
+                <button type="button" id="btn-check-stats" class="btn btn-outline-primary">Check Statistics</button>
+            </li>
+        </ul>
+    </div>
+</div>
 
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-4">
-                <label for="">Password</label>
-                <p id="account-password">*******</p>
-            </div>
-            <div class="col-md-2">
-                <button id='btn-change-password' class="btn btn-info">Change</button>
-            </div>
-        </div>
-        <!-- Modal Change Password-->
-        <div id="change-password-modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title"><b>Change Password</b></h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="text" class="form-control" placeholder="New Password" id='new-password' required>
-                        <br>
-                        <input type="text" class="form-control" placeholder="Confirm Password" id='confirm-password'
-                            required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="button" id="btn-submit-password" data-dismiss="modal"
-                            class="btn btn-light">Submit</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-4">
-                <label for="">Cell</label>
-                <p id="account-cell">12345678910</p>
-            </div>
-            <div class="col-md-2">
-                <button id='btn-change-tel' class="btn btn-info">Change</button>
-            </div>
-        </div>
-        <!-- Modal Change Tel-->
-        <div id="change-tel-modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title"><b>Change Cell</b></h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="text" class="form-control" placeholder="New Cell" id='new-tel' required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="button" id="btn-submit-tel" data-dismiss="modal"
-                            class="btn btn-light">Submit</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-</body>
 <script>
-    $('#btn-change-UIN').click(() => {
-        $('#change-UIN-modal').modal('show');
-    });
+    $('#btn-create-post').click(() => {
 
-    $('#btn-change-handle').click(() => {
-        $('#change-handle-modal').modal('show');
-    });
+        var t = '<div class="form-group"><label for= "exampleFormControlTextarea1" > Example textarea</label><textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea></div >';
+                
+  
 
-    $('#btn-change-password').click(() => {
-        $('#change-password-modal').modal('show');
-    });
+        $('#content-pane').html(t);
 
-    $('#btn-change-tel').click(() => {
-        $('#change-tel-modal').modal('show');
-    });
 
-    $('#btn-submit-UIN').click(() => {
-        var new_UIN = $('#new-UIN').val();
-        $('#new-UIN').val('');
-
-        var url = 'controller.php';
-        var query = {
-            page: 'UserPage',
-            command: 'ChangeUIN',
-            new_UIN: new_UIN
-        };
-        // jQuery post
-        $.post(url, query, function (data, status) {
-            var d = JSON.parse(data);
-
-        });
-    });
-
-    $('#btn-submit-handle').click(() => {
-        var handle = $('#new-handle').val();
-        $('#new-handle').val('');
-
-        var url = 'controller.php';
-        var query = {
-            page: 'UserPage',
-            command: 'ChangeHandle',
-            new_handle: new_handle
-        };
-        // jQuery post
-        $.post(url, query, function (data, status) {
-            var d = JSON.parse(data);
-
-        });
-    });
-
-    $('#btn-submit-password').click(() => {
-        var new_password = $('#new-password').val();
-        $('#new-password').val('');
-
-        var url = 'controller.php';
-        var query = {
-            page: 'UserPage',
-            command: 'ChangePassword',
-            new_password: new_password
-        };
-        // jQuery post
-        $.post(url, query, function (data, status) {
-            var d = JSON.parse(data);
-
-        });
-    });
-
-    $('#btn-submit-tel').click(() => {
-        var new_tel = $('#new-tel').val();
-        $('#new-tel').val('');
-
-        var url = 'controller.php';
-        var query = {
-            page: 'UserPage',
-            command: 'ChangeTel',
-            new_tel: new_tel
-        };
-        // jQuery post
-        $.post(url, query, function (data, status) {
-            var d = JSON.parse(data);
-
-        });
     });
 </script>
-
-</html>

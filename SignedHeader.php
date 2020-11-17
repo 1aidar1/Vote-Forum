@@ -18,7 +18,14 @@
 </style>
 
 <div class="row header">
-    <div class="col-md-8">
+    <div class="col-md-2">
+        <form action="controller.php" method="POST" id="home-form">
+            <input type="text" name="page" value="SignedHeader" style="visibility: hidden; position: absolute;">
+            <input type="text" name="command" value="Home" style="visibility: hidden; position: absolute;">
+            <button id='btn-home'>Home</button>
+        </form>
+    </div>
+    <div class="col-md-6">
 
     </div>
 
@@ -50,5 +57,8 @@
     });
     $('#btn-settings').click(() => {
         $('#settings-form').submit();
+    });
+    $('#btn-home').click(() => {
+        $('#home-form').submit();
     });
 </script>

@@ -13,8 +13,15 @@ session_start();
 
 $isSigned = false;
 
+
 if (empty($_POST['page'])) {
-    include('MainPage.php');
+    if(isset($_SESSION['id'])){
+        if(check_validity($_SESSION['handle'],$_SESSION['password'])){
+            include 'SignedPage.php';
+            exit;
+        }
+    }else 
+        include('MainPage.php');
 } else {
     $page = $_POST['page'];
     if ($page == 'Header') {
@@ -64,12 +71,35 @@ if (empty($_POST['page'])) {
                 echo json_encode($ans);
                 break;
         }
-    } else if ($page == 'SignedPage') {
+    } else if ($page == 'Content') {
         if (isset($_POST['command'])) {
             $command = $_POST['command'];
         }
+        if(!isset($_SESSION['id'])){
+            $ans = array(
+                "id" => -1,
+                "display" => 'none'
+            );
+            echo json_encode($ans);
+            exit;
+        }
+        $id = $_SESSION['id'];
         switch ($command) {
-            
+            case 'CreatePost':
+                $ans = array(
+                    "id" => $id,
+                    "display" => 'CreatePost'
+                );
+                echo json_encode($ans);
+                exit;
+
+            case 'SendVote':
+                $ans = array(
+                    "id" => $id,
+                    "display" => 'SendVote'
+                );
+                echo json_encode($ans);
+                exit;
         }
     } else if ($page == 'SettingsPage') {
         if (isset($_POST['command'])) {
@@ -115,6 +145,9 @@ if (empty($_POST['page'])) {
                 break;
             case 'Settings':
                 include 'SettingsPage.php';
+                exit;
+            case 'Home':
+                include 'SignedPage.php';
                 exit;
         }
     }

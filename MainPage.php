@@ -20,6 +20,7 @@
         <?php
         include 'Header.php';
         ?>
+        <br>
         <?php
         include 'content.php';
         ?>
