@@ -27,7 +27,7 @@
             </li>
             <br>
             <li class="nav-item">
-                <button type="button" id="btn-check-stats" class="btn btn-outline-primary">Check Statistics</button>
+                <button type="button" id="btn-check-stats" class="btn btn-outline-primary" onclick="getPosts()">Check Statistics</button>
             </li>
         </ul>
     </div>
@@ -79,11 +79,49 @@
         });
     }
 
+    function getPosts() {
+        var url = 'controller.php';
+        var query = {
+            page: 'Content',
+            command: 'GetPosts'
+
+        };
+        $.post(url, query, function(data) {
+            console.log(data);
+            var rows = JSON.parse(data);
+            var t = "<table class='table table-bordered table-condensed'>";
+            t += '<tr>';
+            for (j in rows[0]) {
+                if (j == "CreatorID")
+                    j = 'Creator';
+                t += '<th>' + j + '</th>';
+            }
+            t += '</tr>'
+            for (var i = 0; i < rows.length; i++) {
+                t += '<tr>';
+                for (j in rows[i]) {
+
+                    t += '<td>' + rows[i][j] + '</td>';
+
+
+                }
+                t += '</tr>';
+            }
+            t += '</table>';
+            $('#content-pane').html(t);
+
+        });
+    }
+
+    $(document).ready(() => {
+        getPosts();
+    });
+
     function cancel() {
         $('#post-name').val("");
         $('#textarea-text').val("");
         var t = '';
-        $('#content-pane').html(t);
+        getPosts();
     }
 
     $('#btn-send-vote').click(() => {

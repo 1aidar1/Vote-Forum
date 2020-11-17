@@ -17,12 +17,12 @@ $isSigned = false;
 
 
 if (empty($_POST['page'])) {
-    if(isset($_SESSION['id'])){
-        if(check_validity($_SESSION['handle'],$_SESSION['password'])){
+    if (isset($_SESSION['id'])) {
+        if (check_validity($_SESSION['handle'], $_SESSION['password'])) {
             include 'SignedPage.php';
             exit;
         }
-    }else 
+    } else
         include('MainPage.php');
 } else {
     $page = $_POST['page'];
@@ -77,7 +77,7 @@ if (empty($_POST['page'])) {
         if (isset($_POST['command'])) {
             $command = $_POST['command'];
         }
-        if(!isset($_SESSION['id'])){
+        if (!isset($_SESSION['id'])) {
             $ans = array(
                 "id" => -1,
                 "display" => 'none'
@@ -105,8 +105,17 @@ if (empty($_POST['page'])) {
             case 'SubmitPost':
                 $post_name = $_POST['post_name'];
                 $post_text = $_POST['post_text'];
-                echo create_post($post_name,$post_text,$_SESSION['id']);
+                echo create_post($post_name, $post_text, $_SESSION['id']);
                 exit;
+            case 'GetPosts':
+                $ans = get_posts();
+                
+                foreach ($ans as $key => $value) {
+                    
+                    $ans[$key]['CreatorID'] = get_user_name($ans[$key]['CreatorID']);
+                    
+                }   
+                echo json_encode($ans);
         }
     } else if ($page == 'SettingsPage') {
         if (isset($_POST['command'])) {
@@ -118,7 +127,7 @@ if (empty($_POST['page'])) {
                 if (isset($_POST['new_UIN'])) {
                     $UIN = $_POST['new_UIN'];
                 }
-                echo change_UIN($UIN,$id);
+                echo change_UIN($UIN, $id);
                 break;
             case 'ChangeHandle':
                 if (isset($_POST['new_handle'])) {
