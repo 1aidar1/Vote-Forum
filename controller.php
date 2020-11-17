@@ -9,6 +9,8 @@ if (!isset($_SERVER['HTTPS'])) {
 
 require('model.php');
 require('model2.php');
+require('model3.php');
+
 session_start();
 
 $isSigned = false;
@@ -69,7 +71,7 @@ if (empty($_POST['page'])) {
                     "display" => $display_type
                 );
                 echo json_encode($ans);
-                break;
+                exit;
         }
     } else if ($page == 'Content') {
         if (isset($_POST['command'])) {
@@ -99,6 +101,11 @@ if (empty($_POST['page'])) {
                     "display" => 'SendVote'
                 );
                 echo json_encode($ans);
+                exit;
+            case 'SubmitPost':
+                $post_name = $_POST['post_name'];
+                $post_text = $_POST['post_text'];
+                echo create_post($post_name,$post_text,$_SESSION['id']);
                 exit;
         }
     } else if ($page == 'SettingsPage') {

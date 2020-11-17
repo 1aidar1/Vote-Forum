@@ -45,15 +45,19 @@
             <li class="nav-item">
                 <button type="button" id="btn-check-stats" class="btn btn-outline-primary">Check Statistics</button>
             </li>
+            <button></button>
         </ul>
+        
     </div>
+
 </div>
 
 <script>
     $('#btn-create-post').click(() => {
-
-        var t = '<div class="form-group"><label for= "exampleFormControlTextarea1" > Example textarea</label><textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea></div >';
-                
+        
+        var t = '<input type="text" id="post-name" placeholder = "Post name">';
+        t += '<div class="form-group"><textarea class="form-control" placeholder = "Text" id="exampleFormControlTextarea1" rows="3"></textarea></div >';
+        t += '<button type="button" id="btn-submit-textarea" class="btn btn-outline-dark">Dark</button>';
   
 
         $('#content-pane').html(t);

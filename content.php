@@ -43,16 +43,48 @@
         // jQuery post
         $.post(url, query, function(data) {
             var d = JSON.parse(data);
-            if (d.display == 'CreatePost' && isSigned(d.id)) {
-                var t = '<div class="form-group"><label for= "exampleFormControlTextarea1"> Create Post: </label><textarea class="form-control" id="create-post-text" rows="10"></textarea></div >';
-                $('#content-pane').html(t);
-            }
-            else{
+            if (isSigned(d.id)) {
+                if (d.display == 'CreatePost') {
+                    var t = '<input type="text" id="post-name" placeholder = "Post name">';
+                    t += '<textarea class="form-control" placeholder = "Text" id="textarea-text" rows="10"></textarea>';
+                    t += '<button type="button" id="btn-submit-textarea" class="btn btn-outline-dark" onclick="submit()">Submit</button>';
+                    t += '<button type="button" id="btn-cancel-textarea" class="btn btn-outline-dark" onclick="cancel()">Cancel</button>';
+                    $('#content-pane').html(t);
+                }
+
+            } else {
                 $('#register-modal').modal('show');
             }
         });
 
     });
+
+    function submit() {
+        var url = 'controller.php';
+        var query = {
+            page: 'Content',
+            command: 'SubmitPost',
+            post_name: $('#post-name').val(),
+            post_text: $('#textarea-text').val()
+
+        };
+        $.post(url, query, function(data) {
+            if (data) {
+                alert('Post Created');
+                cancel();
+            } else {
+                alert("Error occured.");
+            }
+
+        });
+    }
+
+    function cancel() {
+        $('#post-name').val("");
+        $('#textarea-text').val("");
+        var t = '';
+        $('#content-pane').html(t);
+    }
 
     $('#btn-send-vote').click(() => {
         var url = 'controller.php';
@@ -63,36 +95,11 @@
         // jQuery post
         $.post(url, query, function(data) {
             var d = JSON.parse(data);
-            if(isSigned(d.id)){
+            if (isSigned(d.id)) {
                 var t = '';
-            }
-            else{
+            } else {
                 $('#register-modal').modal('show');
             }
-            /*
-            if (data != -1) {
-                var t = "<table class='table table-bordered table-condensed'>";
-                t += '<tr>'
-                for (j in rows[0]) {
-                    if (j != "Id")
-                        t += '<th>' + j + '</th>'
-                }
-                t += '</tr>'
-
-                for (var i = 0; i < rows.length; i++) {
-                    t += '<tr>';
-                    for (j in rows[i]) {
-
-                        if (j != "Id") {
-                            t += '<td>' + rows[i][j] + '</td>';
-                        }
-                    }
-                    t += '</tr>';
-                }
-                t += '</table>';
-                $('#content-panes').html(t);
-            }
-            */
         });
 
     });
