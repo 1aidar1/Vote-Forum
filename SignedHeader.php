@@ -1,15 +1,10 @@
 <style>
     .header {
-        background-color: aqua;
-    }
-
-    .dropdown {
-        text-align: end;
-    }
-
-    div {
-        outline: solid red 1px;
-        padding: 0px;
+        border: darkgray 2px solid;
+        border-radius: 5px;
+        padding-top:0.5em;
+        padding-bottom: 0.5em;
+        text-align: center;
     }
 
     .col-md-4 {
@@ -25,11 +20,11 @@
             <button id='btn-home'>Home</button>
         </form>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-7">
 
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Your Profile

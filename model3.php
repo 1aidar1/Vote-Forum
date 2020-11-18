@@ -12,7 +12,7 @@ function get_posts()
 {
     global $conn;
     
-    $sql = "select PostName,CreatorID,Date from ProjectPosts order by ID desc";
+    $sql = "select ID,PostName,CreatorID,Date from ProjectPosts order by ID desc";
     $result = mysqli_query($conn, $sql);
     $data = [];
     $i=0;
@@ -20,6 +20,41 @@ function get_posts()
         $data[$i++] = $row;
     }
     return $data;
+}
+
+function get_comments($post_id){   
+    global $conn;
+    $post_id = (int) $post_id;
+    $sql = "select * from ProjectComments where PostID=$post_id";
+    $result = mysqli_query($conn, $sql);
+    $data = [];
+    $i=0;
+    while($row = mysqli_fetch_assoc($result)){
+        //$row['CreatorID'] = get_user_name($row['CreatorID']);
+        $data[$i++] = $row;
+    }
+    return $data;
+}
+
+function get_post_content($id) 
+{
+    global $conn;
+    $id = (int) $id;
+    
+    $sql = "select * from ProjectPosts where ID = $id";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        return $row;
+    } else
+        return -1;
+}
+
+function comment_post($post_id,$comment_text,$user_id){
+    global $conn;
+    $current_date = date('Ymd');
+    $sql = "insert into ProjectComments value(NULL,'$post_id','$comment_text','$user_id','$current_date')";
+    return mysqli_query($conn,$sql);
 }
 
 function get_user_name($user_id)

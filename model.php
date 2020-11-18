@@ -76,7 +76,7 @@ function join_a_user($UIN, $handle, $password, $tel)
         return false;
     } else {
         $hash_password = hash('SHA256',$password);
-        $sql = "insert into ProjectUsers value (NULL,'$UIN','$handle','$hash_password', '$tel','$current_date')";
+        $sql = "insert into ProjectUsers value (NULL,'$UIN','$handle','$hash_password', '$tel','$current_date',0)";
         if (mysqli_query($conn, $sql)) {
             return true;
         } else return false;

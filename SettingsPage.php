@@ -19,10 +19,6 @@
 
 <body>
     <style>
-        div {
-            outline: red 1px solid;
-        }
-
         label+p {
             color: darkgrey;
             font-size: 1em;

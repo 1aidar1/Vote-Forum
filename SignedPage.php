@@ -16,7 +16,6 @@
     <div class="container">
 
         <?php
-        echo $_SESSION['id'];
         include 'SignedHeader.php';
         echo '<br>';
         include 'content.php';

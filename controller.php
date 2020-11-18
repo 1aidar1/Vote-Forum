@@ -78,12 +78,27 @@ if (empty($_POST['page'])) {
             $command = $_POST['command'];
         }
         if (!isset($_SESSION['id'])) {
-            $ans = array(
-                "id" => -1,
-                "display" => 'none'
-            );
-            echo json_encode($ans);
-            exit;
+            switch ($command) {
+                case 'GetPosts':
+                    $ans = get_posts();
+
+                    foreach ($ans as $key => $value) {
+                        $ans[$key]['CreatorID'] = get_user_name($ans[$key]['CreatorID']);
+                    }
+                    echo json_encode($ans);
+                    exit;
+
+                case 'OpenPost':
+                    $post_id = $_POST['post_id'];
+                    $post_id = (int) filter_var($post_id, FILTER_SANITIZE_NUMBER_INT);
+                    $ans = get_post_content($post_id);
+                    $_SESSION['current_post'] = $post_id;
+                    /*foreach ($ans as $key => $value) {
+                        $ans[$key]['CreatorID'] = get_user_name($ans[$key]['CreatorID']);
+                    }*/
+                    echo json_encode($ans);
+                    exit;
+            }
         }
         $id = $_SESSION['id'];
         switch ($command) {
@@ -109,12 +124,40 @@ if (empty($_POST['page'])) {
                 exit;
             case 'GetPosts':
                 $ans = get_posts();
+
+                foreach ($ans as $key => $value) {
+                    $ans[$key]['CreatorID'] = get_user_name($ans[$key]['CreatorID']);
+                }
+                echo json_encode($ans);
+                exit;
+            case 'OpenPost':
+                $post_id = $_POST['post_id'];
+                $post_id = (int) filter_var($post_id, FILTER_SANITIZE_NUMBER_INT);
+                $ans = get_post_content($post_id);
+                $_SESSION['current_post'] = $post_id;
+                foreach ($ans as $key => $value) {
+                    if(isset($ans[$key]['CreatorID'])){
+                        $ans[$key]['CreatorID'] = get_user_name($ans[$key]['CreatorID']);
+                    }
+                }
+                echo json_encode($ans);
+                exit;
+            case 'SubmitComment':
+                $id = $_SESSION['id'];
+                $comment_text = $_POST['comment_text'];
+                //echo $comment_text;
+                //echo $_SESSION['current_post'];
+                echo comment_post($_SESSION['current_post'], $comment_text, $id);
+                exit;
+            case 'GetComments':
+                $ans = get_comments($_SESSION['current_post']);
                 
                 foreach ($ans as $key => $value) {
-                    
-                    $ans[$key]['CreatorID'] = get_user_name($ans[$key]['CreatorID']);
-                    
-                }   
+                    if(isset($ans[$key]['UserID'])){
+                        $ans[$key]['UserID'] = get_user_name($ans[$key]['UserID']);
+                    }
+                }
+                
                 echo json_encode($ans);
         }
     } else if ($page == 'SettingsPage') {
@@ -168,4 +211,3 @@ if (empty($_POST['page'])) {
         }
     }
 }
-?>

@@ -1,11 +1,12 @@
 <style>
     .header {
-        background-color: aqua;
+        border: darkgray 2px solid;
+        border-radius: 18px;
+        padding-top:0.5em;
+        padding-bottom: 0.5em;
     }
 
-    div {
-        outline: red solid 1px;
-    }
+
 
     .col-md-2 {
         margin-top: 0.5%;
