@@ -95,8 +95,8 @@
                             <div>
                                 <label for="signin-password">Password: </label>
                                 <input type="password" name="password" id="signin-password" required>
+                                <p id='error-msg' style="color: red;"><?php echo $error; ?></p>
                             </div>
-                            <?php echo $error ?>
                         </div>
                         <div class="modal-footer">
                             <input type="text" name="page" id="page" value="Header" style="visibility: hidden; position: absolute;">
@@ -129,9 +129,26 @@
     });
     */
     $(document).ready(() => {
-        if(<?php if($error!=''){ echo true;}else{echo false;} ?>){
-            $('#sign-in-modal').modal('show');
-        }
+        //alert($('#error-msg').text());
+        var url = 'controller.php';
+        var query = {
+            page: 'Header',
+            command: 'ErrorMsg',
+            error: $('#error-msg').text()
+        };
+        // jQuery post
+        $.post(url, query, function(data) {
+            var d = JSON.parse(data);
+            var t ='';
+            if(d.ans == -1){
+                 t = d.error;
+                 $('#sign-in-modal').modal('show');
+            }
+            else{
+                t='';
+            }
+            $('#error-msg').text(t);
+        });
     });
 
     $('#btn-form-register').click(() => {

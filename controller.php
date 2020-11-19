@@ -1,10 +1,11 @@
 <?php
 
+$isSigned = false;
+$error = '';
 
 if (!isset($_SERVER['HTTPS'])) {
     $url = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     header("Location: " . $url);
-    exit;
 }
 
 require('model.php');
@@ -12,9 +13,6 @@ require('model2.php');
 require('model3.php');
 
 session_start();
-
-$isSigned = false;
-$error = '';
 
 
 if (empty($_POST['page'])) {
@@ -24,7 +22,8 @@ if (empty($_POST['page'])) {
             exit;
         }
     } else
-        include('MainPage.php');
+        $error = '';
+    include 'MainPage.php';
 } else {
     $page = $_POST['page'];
     if ($page == 'Header') {
@@ -32,6 +31,22 @@ if (empty($_POST['page'])) {
             $command = $_POST['command'];
         }
         switch ($command) {
+
+            case 'ErrorMsg':
+                if ($_POST['error'] != '') {
+                    $ans = array(
+                        "ans" => -1,
+                        "error" => 'Wrong Handle or password'
+                    );
+                    echo json_encode($ans);
+                } else {
+                    $ans = array(
+                        "ans" => 1,
+                        "error" => ''
+                    );
+                    echo json_encode($ans);
+                }
+                exit;
             case 'SignIn':
                 if (isset($_POST['handle']) && isset($_POST['password'])) {
                     $handle = $_POST['handle'];
@@ -104,6 +119,19 @@ if (empty($_POST['page'])) {
                 case 'Vote':
                     echo -1;
                     exit;
+                case 'CheckVote':
+                    echo json_encode(check_stats());
+                    exit;
+                case 'GetComments':
+                    $ans = get_comments($_SESSION['current_post']);
+
+                    foreach ($ans as $key => $value) {
+                        if (isset($ans[$key]['UserID'])) {
+                            $ans[$key]['UserID'] = get_user_name($ans[$key]['UserID']);
+                        }
+                    }
+                    echo json_encode($ans);
+                    exit;
             }
         }
         //IF SIGNED
@@ -117,14 +145,13 @@ if (empty($_POST['page'])) {
                 echo json_encode($ans);
                 exit;
 
-            case 'Vote': 
+            case 'Vote':
                 $vote = $_POST['vote'];
                 $v = (int) hasVoted($id);
-                if($v!=0){
+                if ($v != 0) {
                     echo 0;
-                }
-                else{
-                    vote($id,$vote);
+                } else {
+                    vote($id, $vote);
                     echo 1;
                 }
                 exit;
@@ -168,8 +195,11 @@ if (empty($_POST['page'])) {
                         $ans[$key]['UserID'] = get_user_name($ans[$key]['UserID']);
                     }
                 }
-
                 echo json_encode($ans);
+                exit;
+            case 'CheckVote':
+                echo json_encode(check_stats());
+                exit;
         }
     } else if ($page == 'SettingsPage') {
         if (isset($_POST['command'])) {
@@ -177,31 +207,38 @@ if (empty($_POST['page'])) {
         }
         $id = $_SESSION['id'];
         switch ($command) {
+            case 'DeleteAccount':
+                $ans = delete_account($id);
+                session_unset();
+                session_destroy();
+                if ($ans)
+                    include 'MainPage.php';
+                exit;
             case 'ChangeUIN':
                 if (isset($_POST['new_UIN'])) {
                     $UIN = $_POST['new_UIN'];
                 }
                 echo change_UIN($UIN, $id);
-                break;
+                exit;
             case 'ChangeHandle':
                 if (isset($_POST['new_handle'])) {
                     $handle = $_POST['new_handle'];
                 }
                 echo change_handle($handle, $id);
-                break;
+                exit;
             case 'ChangePassword':
                 if (isset($_POST['new_password'])) {
                     $password = $_POST['new_password'];
                     $confirm_password = $_POST['confirm_password'];
                 }
                 echo change_password($password, $confirm_password, $id);
-                break;
+                exit;
             case 'ChangeTel':
                 if (isset($_POST['new_tel'])) {
                     $tel = $_POST['new_tel'];
                 }
                 echo change_tel($tel, $id);
-                break;
+                exit;
         }
     } else if ($page == 'SignedHeader') {
         if (isset($_POST['command'])) {
@@ -212,7 +249,7 @@ if (empty($_POST['page'])) {
                 session_unset();
                 session_destroy();
                 include 'MainPage.php';
-                break;
+                exit;
             case 'Settings':
                 include 'SettingsPage.php';
                 exit;
@@ -222,4 +259,3 @@ if (empty($_POST['page'])) {
         }
     }
 }
-?>

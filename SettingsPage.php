@@ -5,16 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -42,10 +36,12 @@
         <?php
         include 'SignedHeader.php';
         ?>
+        <br>
         <div class="row">
             <h1>Account Settings</h1>
         </div>
         <hr>
+        <!---
         <div class="row">
             <div class="col-md-4">
                 <label for="">UIN</label>
@@ -55,10 +51,9 @@
                 <button id='btn-change-UIN' class="btn btn-info">Change</button>
             </div>
         </div>
-        <!-- Modal Change UIN-->
         <div id="change-UIN-modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
-                <!-- Modal content-->
+                 Modal content
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title"><b>Change UIN</b></h4>
@@ -69,13 +64,13 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="button" id="btn-submit-UIN" data-dismiss="modal"
-                            class="btn btn-light">Submit</button>
+                        <button type="button" id="btn-submit-UIN" data-dismiss="modal" class="btn btn-light">Submit</button>
                     </div>
                 </div>
 
             </div>
         </div>
+    -->
         <br>
         <div class="row">
             <div class="col-md-4">
@@ -100,14 +95,14 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="button" id="btn-submit-handle" data-dismiss="modal"
-                            class="btn btn-light">Submit</button>
+                        <button type="button" id="btn-submit-handle" data-dismiss="modal" class="btn btn-light">Submit</button>
                     </div>
                 </div>
 
             </div>
         </div>
         <br>
+        
         <div class="row">
             <div class="col-md-4">
                 <label for="">Password</label>
@@ -117,10 +112,10 @@
                 <button id='btn-change-password' class="btn btn-info">Change</button>
             </div>
         </div>
-        <!-- Modal Change Password-->
+        
         <div id="change-password-modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
-                <!-- Modal content-->
+                
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title"><b>Change Password</b></h4>
@@ -129,18 +124,17 @@
                     <div class="modal-body">
                         <input type="text" class="form-control" placeholder="New Password" id='new-password' required>
                         <br>
-                        <input type="text" class="form-control" placeholder="Confirm Password" id='confirm-password'
-                            required>
+                        <input type="text" class="form-control" placeholder="Confirm Password" id='confirm-password' required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="button" id="btn-submit-password" data-dismiss="modal"
-                            class="btn btn-light">Submit</button>
+                        <button type="button" id="btn-submit-password" data-dismiss="modal" class="btn btn-light">Submit</button>
                     </div>
                 </div>
 
             </div>
         </div>
+        <!--    
         <br>
         <div class="row">
             <div class="col-md-4">
@@ -151,10 +145,10 @@
                 <button id='btn-change-tel' class="btn btn-info">Change</button>
             </div>
         </div>
-        <!-- Modal Change Tel-->
+        <!-- Modal Change Tel
         <div id="change-tel-modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
-                <!-- Modal content-->
+                <!-- Modal content
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title"><b>Change Cell</b></h4>
@@ -165,16 +159,47 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="button" id="btn-submit-tel" data-dismiss="modal"
-                            class="btn btn-light">Submit</button>
+                        <button type="button" id="btn-submit-tel" data-dismiss="modal" class="btn btn-light">Submit</button>
                     </div>
                 </div>
 
             </div>
         </div>
+    -->
+        <br>
+        <div class="row" style="text-align: center;">
+            <div class="col-md-5">
+                <button id='btn-delete-account' class="btn btn-danger">Delete Acccount</button>
+            </div>
+        </div>
+        <!-- Modal Delete account Tel-->
+        <form action="controller.php" method="POST" id="delete-form">
+            <div id="delete-account-modal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title"><b>Delete Account</b></h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="text" name="page" value="SettingsPage" style="visibility: hidden; position: absolute;">
+                            <input type="text" name="command" value="DeleteAccount" style="visibility: hidden; position: absolute;">
+                            <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                            <button type="button" id="btn-confirm-delete" data-dismiss="modal" class="btn btn-light">Delete</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
 
 </body>
 <script>
+    $('#btn-delete-account').click(() => {
+        $('#delete-account-modal').modal('show');
+    });
     $('#btn-change-UIN').click(() => {
         $('#change-UIN-modal').modal('show');
     });
@@ -191,6 +216,24 @@
         $('#change-tel-modal').modal('show');
     });
 
+    $('#btn-confirm-delete').click(() => {
+        $('#delete-form').submit();
+        /*
+        var url = 'controller.php';
+        var query = {
+            page: 'SettingsPage',
+            command: 'DeteleAccount'
+        };
+        // jQuery post
+        $.post(url, query, function(data, status) {
+            //var d = JSON.parse(data);
+            alert(status);
+            window.location.replace("controller.php");
+
+        });
+        */
+    });
+
     $('#btn-submit-UIN').click(() => {
         var new_UIN = $('#new-UIN').val();
         $('#new-UIN').val('');
@@ -202,9 +245,9 @@
             new_UIN: new_UIN
         };
         // jQuery post
-        $.post(url, query, function (data, status) {
+        $.post(url, query, function(data, status) {
             //var d = JSON.parse(data);
-            alert(data);
+            alert(status);
 
         });
     });
@@ -220,9 +263,9 @@
             new_handle: new_handle
         };
         // jQuery post
-        $.post(url, query, function (data, status) {
+        $.post(url, query, function(data, status) {
             //var d = JSON.parse(data);
-            alert(data);
+            alert(status);
 
         });
     });
@@ -240,9 +283,9 @@
             confirm_password: confirm_password
         };
         // jQuery post
-        $.post(url, query, function (data, status) {
+        $.post(url, query, function(data, status) {
             //var d = JSON.parse(data);
-            alert(data);
+            alert(status);
 
         });
     });
@@ -258,9 +301,9 @@
             new_tel: new_tel
         };
         // jQuery post
-        $.post(url, query, function (data, status) {
+        $.post(url, query, function(data, status) {
             //var d = JSON.parse(data);
-            alert(data);
+            alert(status);
         });
     });
 </script>

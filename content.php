@@ -146,6 +146,42 @@
 </div>
 
 <script>
+
+    $('#btn-check-stats').click(()=>{
+        cleanContent();
+        var url = 'controller.php';
+        var query = {
+            page: 'Content',
+            command: 'CheckVote'
+        };
+        $.post(url, query, function(data) {
+            var d = JSON.parse(data);
+            console.log(d);
+            var candidates = [0,0,0,0,0,0];
+            var total=0;
+            for(var i=0;i<d.length;i++){
+                if(d[i]!=0){
+                    candidates[d[i]-1]++;
+                    total++;
+                }
+            }
+
+            console.log(candidates.toString());
+
+            var ans = [0,0,0,0,0,0];
+            var t = '<div><h3>Statistics:</h3><hr>';
+            for(var i=0;i<ans.length;i++){
+                ans[i] = candidates[i]*100/total;
+                ans[i] = ans[i].toFixed(2);
+                t+='<p> Candidate ' + (i+1) + ': ' + ans[i] +'%</p>'
+            }
+            t+='</div>';
+            $('#content-pane').html(t);
+
+
+        });
+    });
+
     $('#btn-vote').click(() => {
         var radios = $('.custom-control-input');
         //console.log(radios);
@@ -286,7 +322,7 @@
             console.log(d);
             var head = '<h1>' + d.PostName + '</h1><hr>';
             var text = '<p class="post-text">' + d.PostText + '</p><hr>';
-            var info = '<p class="post-info">By: ' + d.CreatorID + " Date: " + d.Date + '</p>';
+            var info = '<p class="post-info"> Date: ' + d.Date + '</p>';
             var t = head + text + info + "<br>";
 
             var comment = '<label>Leave Comment:</label>';

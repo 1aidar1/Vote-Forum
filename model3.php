@@ -50,6 +50,19 @@ function get_post_content($id)
         return -1;
 }
 
+function check_stats(){
+    global $conn;;
+    $sql = "select Vote from ProjectUsers";
+    $result = mysqli_query($conn,$sql);
+    $data = [];
+    $i=0;
+    while($row = mysqli_fetch_assoc($result)){
+        $data[$i++] = $row['Vote'];
+    }
+    return $data;
+}
+
+
 function comment_post($post_id,$comment_text,$user_id){
     global $conn;
     $current_date = date('Ymd');
