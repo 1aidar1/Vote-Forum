@@ -14,6 +14,7 @@ require('model3.php');
 session_start();
 
 $isSigned = false;
+$error = '';
 
 
 if (empty($_POST['page'])) {
@@ -46,14 +47,9 @@ if (empty($_POST['page'])) {
                     include 'SignedPage.php';
                     exit;
                 } else {
-                    $isSigned = false;
-                    $display_type = 'sign-in';
+                    $error = 'Wrong Handle or password';
+                    include 'MainPage.php';
                 }
-                $ans = array(
-                    "isSigned" => $isSigned,
-                    "display" => $display_type
-                );
-                echo json_encode($ans);
                 //include 'SignedPage.php';
                 exit;
             case 'Register':
@@ -98,8 +94,19 @@ if (empty($_POST['page'])) {
                     }*/
                     echo json_encode($ans);
                     exit;
+                case 'CreatePost':
+                    $ans = array(
+                        "id" => -1,
+                        "display" => 'register'
+                    );
+                    echo json_encode($ans);
+                    exit;
+                case 'Vote':
+                    echo -1;
+                    exit;
             }
         }
+        //IF SIGNED
         $id = $_SESSION['id'];
         switch ($command) {
             case 'CreatePost':
@@ -110,12 +117,16 @@ if (empty($_POST['page'])) {
                 echo json_encode($ans);
                 exit;
 
-            case 'SendVote':
-                $ans = array(
-                    "id" => $id,
-                    "display" => 'SendVote'
-                );
-                echo json_encode($ans);
+            case 'Vote': 
+                $vote = $_POST['vote'];
+                $v = (int) hasVoted($id);
+                if($v!=0){
+                    echo 0;
+                }
+                else{
+                    vote($id,$vote);
+                    echo 1;
+                }
                 exit;
             case 'SubmitPost':
                 $post_name = $_POST['post_name'];
@@ -136,7 +147,7 @@ if (empty($_POST['page'])) {
                 $ans = get_post_content($post_id);
                 $_SESSION['current_post'] = $post_id;
                 foreach ($ans as $key => $value) {
-                    if(isset($ans[$key]['CreatorID'])){
+                    if (isset($ans[$key]['CreatorID'])) {
                         $ans[$key]['CreatorID'] = get_user_name($ans[$key]['CreatorID']);
                     }
                 }
@@ -151,13 +162,13 @@ if (empty($_POST['page'])) {
                 exit;
             case 'GetComments':
                 $ans = get_comments($_SESSION['current_post']);
-                
+
                 foreach ($ans as $key => $value) {
-                    if(isset($ans[$key]['UserID'])){
+                    if (isset($ans[$key]['UserID'])) {
                         $ans[$key]['UserID'] = get_user_name($ans[$key]['UserID']);
                     }
                 }
-                
+
                 echo json_encode($ans);
         }
     } else if ($page == 'SettingsPage') {
@@ -211,3 +222,4 @@ if (empty($_POST['page'])) {
         }
     }
 }
+?>

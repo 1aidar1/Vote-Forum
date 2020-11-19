@@ -78,7 +78,7 @@
             </li>
             <br>
             <li class="nav-item">
-                <button type="button" id="btn-send-vote" class="btn btn-outline-dark" data-toggle='modal' data-target='#vote-modal'>Send Vote</button>
+                <button type="button" class="btn btn-outline-dark" data-toggle='modal' data-target='#vote-modal'>Send Vote</button>
             </li>
             <br>
             <li class="nav-item">
@@ -153,6 +153,7 @@
         for (var i = 0, length = radios.length; i < length; i++) {
             if (radios[i].checked) {
                 ans = radios[i].value;
+                console.log("VOTE: "+ ans);
                 break;
             }
         }
@@ -164,6 +165,18 @@
 
         };
         $.post(url, query, function(data) {
+            if(data == 0 ){
+                alert('Cannot vote twice!');
+                $('#vote-modal').modal('hide');
+            }
+            else if(data == 1){
+                alert('vote submited');
+                $('#vote-modal').modal('hide');
+            }
+            else if(data == -1){
+                $('#vote-modal').modal('hide');
+                $('#register-modal').modal('show');
+            }
 
         });
     });
@@ -357,24 +370,6 @@
         var t = '';
         getPosts();
     }
-
-    $('#btn-send-vote').click(() => {
-        var url = 'controller.php';
-        var query = {
-            page: 'Content',
-            command: 'SendVote'
-        };
-        // jQuery post
-        $.post(url, query, function(data) {
-            var d = JSON.parse(data);
-            if (isSigned(d.id)) {
-                var t = '';
-            } else {
-                $('#register-modal').modal('show');
-            }
-        });
-
-    });
 
     function isSigned(data) {
         if (data == -1) {

@@ -12,6 +12,20 @@ function check_existence_handle($handle)
     else
         return false;
 }
+
+function vote($id,$vote){
+    global $conn;
+    $sql = "update ProjectUsers set Vote = '$vote' where ID = '$id' and Vote = 0 ";
+    return mysqli_query($conn,$sql);
+}
+function hasVoted($id){
+    global $conn;
+    $sql = "select Vote from ProjectUsers where ID = '$id'";
+    $result = mysqli_query($conn,$sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row['Vote'];
+}
+
 function check_existence_UIN($UIN)
 {
     global $conn;

@@ -96,6 +96,7 @@
                                 <label for="signin-password">Password: </label>
                                 <input type="password" name="password" id="signin-password" required>
                             </div>
+                            <?php echo $error ?>
                         </div>
                         <div class="modal-footer">
                             <input type="text" name="page" id="page" value="Header" style="visibility: hidden; position: absolute;">
@@ -127,6 +128,11 @@
         });
     });
     */
+    $(document).ready(() => {
+        if(<?php if($error!=''){ echo true;}else{echo false;} ?>){
+            $('#sign-in-modal').modal('show');
+        }
+    });
 
     $('#btn-form-register').click(() => {
         $('#register-modal').modal('hide');
