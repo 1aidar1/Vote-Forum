@@ -32,7 +32,7 @@ function check_existence_UIN($UIN)
     $sql = "select UIN from ProjectUsers where UIN = '$UIN'";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0)
-        return true;
+        return true;    
     else
         return false;
 }
@@ -86,7 +86,7 @@ function join_a_user($UIN, $handle, $password, $tel)
 {
     global $conn;
     $current_date = date('Ymd');
-    if (check_existence_handle($handle) || check_existence_UIN($UIN) || !isTel($tel)) {
+    if (check_existence_handle($handle) || check_existence_UIN($UIN)) {
         return false;
     } else {
         $hash_password = hash('SHA256',$password);
